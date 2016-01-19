@@ -12,6 +12,4 @@ class Analysis:
 
     def __init__(self, image_id):
         self.id = uuid.uuid4()
-        self.name = 'Test analysis'
-        self.count = 10
         self.image_id = image_id
