@@ -1,4 +1,5 @@
 import cv2
+import numpy
 from flask import current_app
 
 from project.image.model import Image
