@@ -7,6 +7,7 @@ class Config(object):
     IMAGE_OUTPUT_DIR = os.path.abspath('images/output')
     IMAGE_INPUT_DIR = os.path.abspath('images/input')
     IMAGE_BASE_URL = '/images/output'
+    CAMERA_ENDPOINT = 'http://192.168.0.116:8080/?action=snapshot'
 
 
 class Production(Config):
