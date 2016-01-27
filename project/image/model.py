@@ -8,15 +8,20 @@ from project.core.db.model import BaseModel
 
 
 class Image(BaseModel):
+    analysis_json_fields = {
+        'name': fields.String,
+        'result': fields.Integer
+    }
+
     json_fields = {
         'id': fields.String,
+        'analyses': fields.List(fields.Nested(analysis_json_fields)),
         'created_at': fields.DateTime('iso8601'),
         'description': fields.String,
         'name': fields.String
     }
 
-    id = UUIDField(primary_key=True, default=uuid.uuid4())
+    id = UUIDField(primary_key=True, default=uuid.uuid4)
     description = TextField(default='')
     name = TextField(default='')
     created_at = DateTimeField(default=datetime.datetime.now)
-

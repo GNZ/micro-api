@@ -4,13 +4,14 @@ from flask import Flask
 from flask_restful import Api
 
 # Initialize api
+
 app = Flask(__name__)
 
 # Load config
 obj_name = 'project.config.' + os.getenv('MICRO_ENVIRONMENT')
 app.config.from_object(obj_name)
 
-api = Api(app)
+api = Api(app, catch_all_404s=True)
 
 # Initialize db
 from peewee import SqliteDatabase
@@ -22,6 +23,7 @@ micro_db = SqliteDatabase(app.config.get('DB_PATH'))
 from project.analysis.controller import AnalysisController
 from project.image.controller import ImageController
 from project.image.model import Image
+from project.analysis.model import Analysis
 from project.image_list.controller import ImageListController
 
 
@@ -29,7 +31,7 @@ from project.image_list.controller import ImageListController
 @app.before_request
 def _db_connect():
     micro_db.connect()
-    micro_db.create_tables([Image], safe=True)
+    micro_db.create_tables([Image, Analysis], safe=True)
 
 
 @app.teardown_request
@@ -41,7 +43,7 @@ def _close_db(exception):
 # Add resource paths
 api.add_resource(ImageController, '/images/<id>')
 api.add_resource(ImageListController, '/images')
-api.add_resource(AnalysisController, '/analysis', '/analysis/<image_id>')
+api.add_resource(AnalysisController, '/images/<image_id>/analyses')
 
 if __name__ == '__main__':
     # Run
