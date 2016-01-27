@@ -1,4 +1,6 @@
-from flask_restful import Resource, marshal_with
+from flask import request
+from flask_restful import Resource, marshal_with, abort
+from peewee import DoesNotExist
 
 from project.image.model import Image
 from project.image.service import ImageService
@@ -14,13 +16,36 @@ class ImageController(Resource):
 
         return image
 
-    @marshal_with(Image.json_fields)
-    def post(self):
-        image = self.image_service.create()
-
-        return image
-
     def delete(self, id):
-        result = self.image_service.delete(id)
+        self.image_service.delete(id)
 
-        return result
+        return True
+
+    @marshal_with(Image.json_fields)
+    def put(self, id):
+        image = parse_image(id, request.form)
+
+        new_image = self.image_service.update(image)
+
+        return new_image
+
+
+def parse_image(id, args):
+    try:
+        image = Image.get(id=id)
+    except DoesNotExist:
+        abort(404)
+
+    image.description = get_or_abort_bad_request(args, 'description')
+    image.name = get_or_abort_bad_request(args, 'name')
+
+    return image
+
+
+def get_or_abort_bad_request(args, name):
+    arg = args[name]
+
+    if arg is None:
+        abort(400)
+
+    return arg

@@ -1,8 +1,10 @@
 import uuid
 from flask_restful import fields
 
+from project.core.db.model import BaseModel
 
-class Analysis:
+
+class Analysis(BaseModel):
     json_fields = {
         'id': fields.String,
         'image_id': fields.String,
