@@ -1,7 +1,9 @@
-from flask_restful import Resource, marshal_with
+from flask import request
+from flask_restful import Resource, marshal_with, abort
 
 from project.analysis.model import Analysis
 from project.analysis.service import ImageAnalysisService
+from project.analysis.type import type_names
 
 
 class AnalysisController(Resource):
@@ -10,6 +12,19 @@ class AnalysisController(Resource):
 
     @marshal_with(Analysis.json_fields)
     def post(self, image_id):
-        analysis = self.analysis_service.analyse(image_id)
+        analysis_type = get_analysis_type(request.form)
+
+        analysis = self.analysis_service.analyse(image_id, analysis_type)
 
         return analysis
+
+
+def get_analysis_type(form):
+    type_name = form['type']
+
+    try:
+        type = type_names[type_name]
+    except KeyError:
+        abort(400)
+
+    return type

@@ -9,8 +9,8 @@ from project.core.db.model import BaseModel
 
 class Image(BaseModel):
     analysis_json_fields = {
-        'name': fields.String,
-        'result': fields.Integer
+        'type': fields.String,
+        'result': fields.String
     }
 
     json_fields = {
