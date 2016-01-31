@@ -9,10 +9,7 @@ from skimage.measure import regionprops
 from project.analysis.type.base import AnalysisType
 from project.util.image_utils import ImageUtils
 
-try:
-    import skimage.filters as filters
-except:
-    import skimage.filter as filters
+import skimage.filters as filters
 
 
 class RedCellCount(AnalysisType):
