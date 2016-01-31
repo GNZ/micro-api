@@ -2,3 +2,4 @@
 .sync
 images/output
 db/
+*.pyc
