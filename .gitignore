@@ -2,4 +2,5 @@
 .sync
 images/output
 db/
+venv/
 *.pyc
