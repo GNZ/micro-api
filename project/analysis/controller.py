@@ -1,4 +1,4 @@
-from flask import request, Request
+from flask import request
 from flask_restful import Resource, marshal_with, abort
 
 from project.analysis.model import Analysis
@@ -12,7 +12,7 @@ class AnalysisController(Resource):
 
     @marshal_with(Analysis.json_fields)
     def post(self, image_id):
-        analysis_type = get_analysis_type(Request.get_json())
+        analysis_type = get_analysis_type(request.get_json())
 
         analysis = self.analysis_service.analyse(image_id, analysis_type)
 
