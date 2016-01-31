@@ -13,7 +13,14 @@ app.config.from_object(obj_name)
 
 api = Api(app, catch_all_404s=True)
 
+# Create folders
+if os.path.exists(app.config.get('IMAGE_OUTPUT_DIR')):
+    os.makedirs(app.config.get('IMAGE_OUTPUT_DIR'))
+
 # Initialize db
+if os.path.exists(app.config.get('DB_DIR')):
+    os.makedirs(app.config.get('DB_DIR'))
+
 from peewee import SqliteDatabase
 
 micro_db = SqliteDatabase(app.config.get('DB_PATH'))
