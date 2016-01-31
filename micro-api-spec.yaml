@@ -1,0 +1,124 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: MicroApi
+  description: >
+    **Raspberry Pi image capture and analysis API.**
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /images:
+    get:
+      responses:
+        '200':
+          description: List all images
+          schema:
+            title: Image
+            type: array
+            items:
+              $ref: '#/definitions/Image'
+    post:
+      responses:
+        '200':
+          description: Make a new image
+          schema:
+            $ref: '#/definitions/Image'
+            
+  /images/{id}:
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+    get:
+      responses:
+        200:
+          description: Get an image by id
+          schema:
+            $ref: '#/definitions/Image'
+        404:
+          description: Image not found
+    put:
+      parameters:
+        - name: image
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+      responses:
+        200:
+          description: Update an image
+          schema:
+            $ref: '#/definitions/Image'
+        404:
+          description: Image not found
+    delete:
+      responses:
+        200:
+          description: Delete an image
+        404:
+          description: Image not found
+          
+  /images/{id}/analyses:
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+    post:
+      parameters:
+        - name: analysis
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AnalysisType'
+      responses:
+        200:
+          description: Create new analysis
+          schema:
+            $ref: '#/definitions/Analysis'
+        404:
+          description: Image not found
+            
+definitions:
+  AnalysisType:
+    type: string
+    enum:
+      - BLOOD_RED-CELL-COUNT
+      
+  Analysis:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/AnalysisType'
+      result:
+        type: string
+      
+  Image:
+    type: object
+    properties:
+      id:
+        type: string
+      analyses:
+        type: array
+        items:
+          type: Analysis
+          $ref: '#/definitions/Analysis'
+      created_at:
+        type: string
+        format: dateTime
+      description:
+        type: string
+      name:
+        type: string
+  
