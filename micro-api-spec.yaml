@@ -99,7 +99,7 @@ definitions:
   Analysis:
     type: object
     properties:
-      name:
+      type:
         $ref: '#/definitions/AnalysisType'
       result:
         type: string
