@@ -23,21 +23,21 @@ class ImageController(Resource):
 
     @marshal_with(Image.json_fields)
     def put(self, id):
-        image = parse_image(id, request.form)
+        image = parse_image(id, request.get_json())
 
         new_image = self.image_service.update(image)
 
         return new_image
 
 
-def parse_image(id, args):
+def parse_image(id, json):
     try:
         image = Image.get(id=id)
     except DoesNotExist:
         abort(404)
 
-    image.description = get_or_abort_bad_request(args, 'description')
-    image.name = get_or_abort_bad_request(args, 'name')
+    image.description = get_or_abort_bad_request(json, 'description')
+    image.name = get_or_abort_bad_request(json, 'name')
 
     return image
 
