@@ -1,1 +1,1 @@
-web: gunicorn -b :5000 wsgi:app --log-file -
+web: gunicorn wsgi:app --log-file -
