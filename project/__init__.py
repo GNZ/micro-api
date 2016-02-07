@@ -5,7 +5,7 @@ from flask_restful import Api
 
 # Initialize api
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=None, static_url_path=None)
 
 # Load config
 obj_name = 'project.config.' + os.getenv('MICRO_ENVIRONMENT')
@@ -24,6 +24,12 @@ if not os.path.exists(app.config.get('DB_DIR')):
 from peewee import SqliteDatabase
 
 micro_db = SqliteDatabase(app.config.get('DB_PATH'))
+
+# Set static folder
+app.static_url_path = app.config.get('STATIC_URL_PATH')
+app.static_folder = app.config.get('STATIC_FOLDER')
+app.add_url_rule(app.config.get('STATIC_URL_PATH') + '/<path:filename>', endpoint='static',
+                 view_func=app.send_static_file)
 
 # Modules
 
