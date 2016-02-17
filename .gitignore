@@ -1,6 +1,6 @@
 .idea/
 .sync
 images/output
-db/
+/db/
 venv/
 *.pyc
