@@ -1,9 +1,9 @@
 import cv2
 from flask import current_app
 
-from project.core.camera.service import CameraService
-from project.core.db.service import DatabaseService
+from project.db.service import DatabaseService
 from project.image.model import Image
+from project.util.camera.camera_utils import CameraService
 from project.util.image_utils import ImageUtils
 
 

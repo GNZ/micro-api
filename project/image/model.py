@@ -4,7 +4,7 @@ import uuid
 from flask_restful import fields
 from peewee import UUIDField, TextField, DateTimeField
 
-from project.core.db.model import BaseModel
+from project.db.model import BaseModel
 
 
 class Image(BaseModel):
