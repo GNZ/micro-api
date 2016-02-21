@@ -1,9 +1,8 @@
 import cv2
-from flask import current_app
+from flask import current_app, g
 
 from project.db.service import DatabaseService
 from project.image.model import Image
-from project.util.camera.camera_utils import CameraService
 from project.util.image_utils import ImageUtils
 
 
@@ -33,7 +32,8 @@ class ImageRepository:
             image.array = cv2.imread(self.image_utils.getInputFilename(id))
         else:
             # Get image from mjpeg server
-            image.array = CameraService().capture_image()
+            # image.array = CameraService().capture_image()
+            image.array = g.capture_thread.capture()
 
         # Save captured image
         self.save(image)

@@ -1,9 +1,10 @@
 import os
 
-from flask import Flask
+from flask import Flask, g
 from flask_restful import Api
 
 # Initialize api
+from project.util.camera.camera_utils import CaptureThread
 
 app = Flask(__name__, static_folder=None, static_url_path=None)
 
@@ -60,6 +61,10 @@ def _close_db(exception):
 api.add_resource(ImageController, '/images/<id>')
 api.add_resource(ImageListController, '/images')
 api.add_resource(AnalysisController, '/images/<image_id>/analyses')
+
+# Start streaming
+g.capture_thread = CaptureThread()
+g.capture_thread.start()
 
 if __name__ == '__main__':
     # Run
