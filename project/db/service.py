@@ -42,7 +42,7 @@ class DatabaseService:
 
         os.remove(self.image_utils.getOutputFilename(id))
 
-        return
+        return True
 
     def update_image(self, image):
         image.save()
