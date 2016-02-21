@@ -5,6 +5,7 @@ class Config(object):
     DEBUG = True
     MOCK_CAMERA = False
     IMAGE_OUTPUT_DIR = os.path.abspath('images/output')
+    IMAGE_OUTPUT_THUMB_DIR = os.path.abspath('images/output/thumb')
     IMAGE_INPUT_DIR = os.path.abspath('images/input')
     STATIC_FOLDER = os.path.abspath('images/output')
     STATIC_URL_PATH = '/images/output'

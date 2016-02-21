@@ -17,6 +17,10 @@ class ImageRepository:
         file_name = self.image_utils.getOutputFilename(image.id)
         cv2.imwrite(file_name, image.array)
 
+        thumbnail = cv2.resize(image.array, (200, 200))
+        thumb_file_name = self.image_utils.getOutputThumbnailFilename(image.id)
+        cv2.imwrite(thumb_file_name, thumbnail)
+
         print 'Writing to ' + file_name
         return image
 

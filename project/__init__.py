@@ -17,6 +17,9 @@ api = Api(app, catch_all_404s=True)
 if not os.path.exists(app.config.get('IMAGE_OUTPUT_DIR')):
     os.makedirs(app.config.get('IMAGE_OUTPUT_DIR'))
 
+if not os.path.exists(app.config.get('IMAGE_OUTPUT_THUMB_DIR')):
+    os.makedirs(app.config.get('IMAGE_OUTPUT_THUMB_DIR'))
+
 # Initialize db
 if not os.path.exists(app.config.get('DB_DIR')):
     os.makedirs(app.config.get('DB_DIR'))

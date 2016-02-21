@@ -10,3 +10,6 @@ class ImageUtils:
 
     def buildJpegFilename(self, folder, id):
         return folder + '/' + str(id) + '.jpg'
+
+    def getOutputThumbnailFilename(self, id):
+        return self.buildJpegFilename(current_app.config.get('IMAGE_OUTPUT_THUMB_DIR'), id)
