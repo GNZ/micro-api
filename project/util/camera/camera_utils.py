@@ -1,5 +1,4 @@
 import subprocess
-import sys
 import threading
 import urllib2
 
@@ -39,7 +38,7 @@ class CaptureThread(threading.Thread):
         camera.resolution = (width, height)
         camera.framerate = 15
 
-        camera.start_recording(sys.stdout, format='h264', inline_headers=True)
+        camera.start_recording(player.stdin, format='h264', inline_headers=True)
 
         try:
             while True:

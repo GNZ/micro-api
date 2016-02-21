@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, g
+from flask import Flask
 from flask_restful import Api
 
 # Initialize api
@@ -63,8 +63,8 @@ api.add_resource(ImageListController, '/images')
 api.add_resource(AnalysisController, '/images/<image_id>/analyses')
 
 # Start streaming
-g.capture_thread = CaptureThread()
-g.capture_thread.start()
+capture_thread = CaptureThread()
+capture_thread.start()
 
 if __name__ == '__main__':
     # Run
