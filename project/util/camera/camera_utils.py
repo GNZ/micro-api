@@ -1,4 +1,5 @@
 import subprocess
+import sys
 import threading
 import urllib2
 
@@ -25,11 +26,14 @@ class CaptureThread(threading.Thread):
 
         self.camera = picamera.PiCamera()
 
-        player_cmdline = "cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/output.h264}' :demux=h264 --h264-fps 15"
+        player_cmdline = ['cvlc', '-vv', r'stream:///dev/stdin', '--sout', r'#rtp{sdp=rtsp://:8554/output.h264}', ':demux=h264', '--h264-fps', '15', '--noaudio', '--no-sout-audio']
 
-        player_cmdline_array = str.split(player_cmdline)
 
-        self.player = subprocess.Popen(player_cmdline_array, stdin=subprocess.PIPE)
+        #player_cmdline_array = str.split(player_cmdline)
+
+        #print player_cmdline_array
+
+        self.player = subprocess.Popen(player_cmdline, stdin=subprocess.PIPE)
 
     def run(self):
         camera = self.camera
