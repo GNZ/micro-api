@@ -68,7 +68,7 @@ class RedCellCount(AnalysisType):
         regions = regionprops(labels, cache=True)
 
         # Filter out big wrong regions
-        regions = [region for region in regions if region.area < 1000]
+        regions = [region for region in regions if region.area < 2000]
 
         # Set result
         result = str(len(regions))
