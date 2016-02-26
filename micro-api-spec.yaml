@@ -14,6 +14,8 @@ produces:
 paths:
   /images:
     get:
+      summary: Get all images
+      description: Get all images
       responses:
         '200':
           description: List all images
@@ -23,6 +25,8 @@ paths:
             items:
               $ref: '#/definitions/Image'
     post:
+      summary: Create a new image
+      description: Create a new image
       responses:
         '200':
           description: Make a new image
@@ -36,6 +40,8 @@ paths:
         type: string
         required: true
     get:
+      summary: Get an image by its ID
+      description: Get an image by its ID
       responses:
         200:
           description: Get an image by id
@@ -44,6 +50,8 @@ paths:
         404:
           description: Image not found
     put:
+      summary: Update an image attributes by its ID
+      description: Update an image attributes by its ID
       parameters:
         - name: image
           in: body
@@ -63,6 +71,8 @@ paths:
         404:
           description: Image not found
     delete:
+      summary: Delete an image by its ID
+      description: Delete an image by its ID
       responses:
         200:
           description: Delete an image
@@ -76,6 +86,8 @@ paths:
         type: string
         required: true
     post:
+      summary: Analyse image by ID
+      description: Analyse image by ID
       parameters:
         - name: analysis
           in: body
