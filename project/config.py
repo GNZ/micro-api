@@ -12,7 +12,7 @@ class Config(object):
     DB_DIR = os.path.abspath('db')
     DB_NAME = 'micro.db'
     DB_PATH = DB_DIR + '/' + DB_NAME
-    CAMERA_ENDPOINT = 'http://192.168.0.116:8080/?action=snapshot'
+    CAMERA_ENDPOINT = 'http://localhost:8080/?action=snapshot'
 
 
 class Production(Config):
