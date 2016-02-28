@@ -14,9 +14,6 @@ class ImageAnalysisService:
         # Try to get, otherwise create analysis
         analysis, created = Analysis.get_or_create(image=image_object.id, type=analysis_type.name)
 
-        if not created:
-            return analysis
-
         # Set result
         analysis.result = analysis_type().analyse(image=image_object)
 
